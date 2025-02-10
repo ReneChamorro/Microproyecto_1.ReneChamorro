@@ -39,6 +39,10 @@ body {
     border-bottom-right-radius: 200px;
 }
 
+.on{
+    background-color: white;
+}
+
 .center{
     width: 150px;
     height: 150px;
@@ -53,6 +57,14 @@ body {
 .quarter:hover{
     box-shadow: inset 0px 0px 0px 5px rgb(255, 0, 221);
     box-sizing: border-box;
+}
+
+.quarter {
+    transition: all 0.3s ease;
+}
+
+.quarter:active {
+    filter: brightness(1.5);
 }
 
 #green { background-color: green; }
@@ -70,5 +82,13 @@ body {
     padding: 10px 20px;
     font-size: 18px;
     cursor: pointer;
+    background-color: #4CAF50;
+    color : white;
+    border : none;
+    border-radius: 5px;
+}
+
+#start-button:hover {
+    background-color: #45a049;
 }
 

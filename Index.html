@@ -1,5 +1,5 @@
 <html>
-  <head
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simon dice</title>
@@ -7,11 +7,25 @@
   </head>
   <body>
     <div id="game">
-      <div class="quarter top-left-quarter" id="green"></div>
-      <div class="quarter top-right-quarter" id="red"></div>
-      <div class="quarter bottom-left-quarter" id="yellow"></div>
-      <div class="quarter bottom-right-quarter" id="blue"></div>
-      <div class="center"></div>
+        <div 
+        onclick="quarterClicked(event.currentTarget)" 
+        class="quarter top-left-quarter" id="green">
+      </div>
+        <div 
+        onclick="quarterClicked(event.currentTarget)"
+        class="quarter top-right-quarter" id="red">
+      </div>
+        <div 
+        onclick="quarterClicked(event.currentTarget)"
+        class="quarter bottom-left-quarter" id="yellow">
+      </div>
+        <div 
+        onclick="quarterClicked(event.currentTarget)"
+        class="quarter bottom-right-quarter" id="blue">
+      </div>
+        <div 
+        class="center">
+      </div>
     </div>
     <div id="score">Puntuación: 0</div>
     <button id="start-button">Iniciar Juego</button>
