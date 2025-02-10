@@ -1,63 +1,74 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const quarters = document.querySelectorAll('.quarter');
-    let sequence = [];
-    let userSequence = [];
-    let score = 0;
+const topLeft = document.querySelector('.top-left-quarter');
+const topRight = document.querySelector('.top-right-quarter');
+const bottomLeft = document.querySelector('.bottom-left-quarter');
+const bottomRight = document.querySelector('.bottom-right-quarter');
+const startButton = document.querySelector('.start-button');
 
-    const startButton = document.getElementById('start-button');
-    startButton.addEventListener('click', startGame);
+const getRandomQuarter = () => {
+    const quarters = [topLeft, topRight, bottomLeft, bottomRight];
+    return quarters[parseInt(Math.random() * quarters.length)];
+}
 
-    function startGame() {
-        sequence = [];
-        userSequence = [];
-        score = 0;
-        updateScore();
-        nextRound();
-    }
+const sequences = [getRandomQuarter()];
+let sequenceToGuess = [...sequences];
 
-    function nextRound() {
-        userSequence = [];
-        sequence.push(getRandomQuarter());
-        playSequence();
-    }
-
-    function playSequence() {
-        sequence.forEach((quarter, index) => {
+const flash = (quarter) => {
+    return new Promise((resolve) => {
+        quarter.className += ' active';
+        setTimeout(() => {
+            quarter.className = quarter.className.replace(' active', '');
+            
             setTimeout(() => {
-                quarter.classList.add('active');
-                setTimeout(() => quarter.classList.remove('active'), 500);
-            }, index * 1000);
-        });
-    }
+                resolve();
+            }, 250);
 
-    function getRandomQuarter() {
-        const quartersArray = Array.from(quarters);
-        return quartersArray[Math.floor(Math.random() * quartersArray.length)];
-    }
-
-    quarters.forEach(quarter => {
-        quarter.addEventListener('click', () => {
-            userSequence.push(quarter);
-            if (!checkSequence()) {
-                alert('Juego Terminado');
-                return;
-            }
-            if (userSequence.length === sequence.length) {
-                score++;
-                updateScore();
-                nextRound();
-            }
-        });
+            resolve();
+        }, 750);
     });
+}
 
-    function checkSequence() {
-        for (let i = 0; i < userSequence.length; i++) {
-            if (userSequence[i] !== sequence[i]) return false;
+let canClick = false;
+
+const quarterCLicked = (quarter) => {
+    if (!canClick) return;
+    console.log(quarter);
+    const expectedQuarter = sequenceToGuess.shift();
+    if(expectedQuarter === quarterCLicked){
+        if(sequenceToGuess.length === 0){
+            sequences.push(getRandomQuarter());
+            sequenceToGuess = [...sequences];
+            main();
         }
-        return true;
     }
+    else{
+        alert('Game Over!');
+        startButton.style.display = 'block';
+        sequences.length = 1;
+        sequenceToGuess = [...sequences];
+    }
+}
 
-    function updateScore() {
-        document.getElementById('score').textContent = `Puntuación: ${score}`;
+const main = async () => {
+    for (let quarter of sequences) {
+        await flash(quarter);
     }
-});
+    canClick = true;
+};
+
+topLeft.addEventListener('click', () => quarterCLicked(topLeft));
+topRight.addEventListener('click', () => quarterCLicked(topRight));
+bottomLeft.addEventListener('click', () => quarterCLicked(bottomLeft));
+bottomRight.addEventListener('click', () => quarterCLicked(bottomRight));
+
+const startGame = () => {
+    sequences.length = 0;
+    sequenceToGuess = [];
+    sequences.push(getRandomQuarter());
+    sequenceToGuess = [...sequences];
+    canClick = false;
+    startButton.style.display = 'none';
+    main();
+}
+
+startButton.addEventListener('click', startGame);
+
