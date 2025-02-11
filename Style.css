@@ -81,6 +81,7 @@ body {
 
 
 #score {
+    color: white;
     margin-top: 20px;
     font-size: 24px;
 }
@@ -98,5 +99,28 @@ body {
 
 #start-button:hover {
     background-color: #45a049;
+}
+
+#game-over-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color : white;
+    font-size: 24px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255,0,0,0.8);
+    text-align: center;
+    z-index: 1000;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
