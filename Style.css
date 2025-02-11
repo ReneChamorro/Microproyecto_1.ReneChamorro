@@ -14,6 +14,9 @@ body {
     grid-template-columns: repeat(2, 150px);
     grid-template-rows: repeat(2, 150px);
     gap: 10px;
+    position: relative;
+    width: 320px;
+    height: 320px;
 }
 
 .quarter {
@@ -24,19 +27,23 @@ body {
 
 .top-left-quarter {
     border-top-left-radius: 200px;
+    background-color: green;
 }
 
 .top-right-quarter {
     border-top-right-radius: 200px;
+    background-color: red;
 
 }
 
 .bottom-left-quarter {
     border-bottom-left-radius: 200px;
+    background-color: yellow;
 }
 
 .bottom-right-quarter {
     border-bottom-right-radius: 200px;
+    background-color: blue;
 }
 
 .on{
@@ -48,7 +55,7 @@ body {
     height: 150px;
     border-radius: 200px;
     background-color: black;
-    position: absolute;
+    position:absolute;
     top: 46%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -67,10 +74,11 @@ body {
     filter: brightness(1.5);
 }
 
-#green { background-color: green; }
-#red { background-color: red; }
-#yellow { background-color: yellow; }
-#blue { background-color: blue; }
+.active{
+    background-color: white;
+}
+
+
 
 #score {
     margin-top: 20px;
