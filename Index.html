@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="Style.css">
   </head>
   <body>
+    <div id="main-menu">
+      <h1>Simon dice</h1>
+      <button id="start-button">Iniciar Juego</button>
+      <p>Partidas jugadas: <span id="total-plays">0</span></p>
+    </div>
     <div id="game">
         <div 
         class="quarter top-left-quarter" id="green">
@@ -24,12 +29,12 @@
       </div>
     </div>
     <div id="score">Puntuación: 0</div>
-    <button id="start-button">Iniciar Juego</button>
     <div id="game-over-message" class="hidden">¡Juego terminado! Tu puntuación fue: <span id="final-score">0</span></div>
     <div id="scoreboard" class = "hidden">
       <h2>Mejores puntuaciones</h2>
       <ol id="high-scores">
     </div>
+    <button id="back-to-menu" class="hidden">Volver al menú</button>
     <script src="index.js"></script>
   </body>
 </html>

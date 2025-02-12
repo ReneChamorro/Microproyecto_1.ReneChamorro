@@ -8,6 +8,9 @@ const gameOverMessage = document.querySelector("#game-over-message");
 const finalScore = document.querySelector("#final-score");
 const highScoresList = document.querySelector("#high-scores");
 const scoreboard = document.querySelector("#scoreboard");
+const backTomenuButton = document.querySelector("#back-to-menu");
+const mainMenu = document.querySelector("#main-menu");
+const totalPlays = document.querySelector("#total-plays");
 
 const sounds = {
     topLeft: new Audio('Audio/huh-cat-meme.mp3'),
@@ -111,6 +114,10 @@ const startGame = () => {
     canClick = false;
     startButton.style.display = 'none';
     gameOverMessage.classList.add("hidden");
+    scoreboard.classList.add("hidden");
+    mainMenu.classList.add("hidden");
+    document.querySelector('#game').classList.remove('hidden');
+    document.querySelector('#back-to-menu').classList.remove('hidden');
     main();
 }
 
@@ -144,3 +151,15 @@ const showScoreboard = () => {
         scoreboard.classList.add("hidden");
     }, 8000);
 };
+
+const backToMenu = () => {
+    mainMenu.classList.remove('hidden');
+    document.querySelector('#back-to-menu').classList.add('hidden');
+    gameOverMessage.classList.add('hidden');
+    startButton.style.display = 'block';
+    scoreboard.classList.add('hidden');
+    canClick = false;
+};
+
+backTomenuButton.addEventListener('click', backToMenu);
+
