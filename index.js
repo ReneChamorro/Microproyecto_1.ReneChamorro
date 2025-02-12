@@ -9,6 +9,14 @@ const finalScore = document.querySelector("#final-score");
 const highScoresList = document.querySelector("#high-scores");
 const scoreboard = document.querySelector("#scoreboard");
 
+const sounds = {
+    topLeft: new Audio('Audio/huh-cat-meme.mp3'),
+    topRight: new Audio('Audio/pum.mp3'),
+    bottomLeft: new Audio('Audio/pummm.mp3'),
+    bottomRight: new Audio('Audio/short-augh.mp3'),
+    gameOver: new Audio('Audio/undertale-soul-shatter.mp3')
+};
+
 let score = 0;
 
 const getRandomQuarter = () => {
@@ -21,10 +29,29 @@ let sequenceToGuess = [...sequences];
 
 const flash = async (quarter) => {
     quarter.classList.add('active');
+
+    playsound(quarter);
     await new Promise((resolve => setTimeout(resolve,500)));
     quarter.classList.remove('active');
     await new Promise((resolve => setTimeout(resolve,250)));
 }
+
+const playsound = (quarter) => {
+    switch(quarter){
+        case topLeft:
+            sounds.topLeft.play();
+            break;
+        case topRight:
+            sounds.topRight.play();
+            break;
+        case bottomLeft:
+            sounds.bottomLeft.play();
+            break;
+        case bottomRight:
+            sounds.bottomRight.play();
+            break;
+    };
+};
 
 let canClick = false;
 
@@ -47,6 +74,7 @@ const quarterCLicked = (quarter) => {
     else{
         finalScore.textContent = score;
         gameOverMessage.classList.remove("hidden");
+        sounds.gameOver.play();
         startButton.style.display = 'block';
         saveScore(score);
         sequences.length = 1;
