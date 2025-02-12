@@ -6,6 +6,8 @@ const startButton = document.querySelector('#start-button');
 const scoreDisplay = document.querySelector('#score');
 const gameOverMessage = document.querySelector("#game-over-message");
 const finalScore = document.querySelector("#final-score");
+const highScoresList = document.querySelector("#high-scores");
+const scoreboard = document.querySelector("#scoreboard");
 
 let score = 0;
 
@@ -46,6 +48,7 @@ const quarterCLicked = (quarter) => {
         finalScore.textContent = score;
         gameOverMessage.classList.remove("hidden");
         startButton.style.display = 'block';
+        saveScore(score);
         sequences.length = 1;
         sequenceToGuess = [...sequences];
         score = 0;
@@ -54,6 +57,7 @@ const quarterCLicked = (quarter) => {
         setTimeout(() => {
             gameOverMessage.classList.add("hidden");
         }, 2000);
+        showScoreboard();
     }
 }
 
@@ -73,6 +77,7 @@ bottomRight.addEventListener('click', () => quarterCLicked(bottomRight));
 const startGame = () => {
     sequences.length = 0;
     sequenceToGuess = [];
+    score=0;
     sequences.push(getRandomQuarter());
     sequenceToGuess = [...sequences];
     canClick = false;
@@ -84,5 +89,30 @@ const startGame = () => {
 startButton.addEventListener('click', startGame);
 
 document.addEventListener('DOMContentLoaded', () => {
-    gameOverMessage,classList.add("hidden");
+    gameOverMessage.classList.add("hidden");
 });
+
+const saveScore = (score) => {
+    let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+    highScores.push(score);
+    highScores.sort((a, b) => b - a);
+    highScores = highScores.slice(0, 5);
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+};
+
+const showScoreboard = () => {
+    let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+    const highScoresList = document.getElementById('high-scores');
+    highScoresList.innerHTML = '';
+    if (highScores.length === 0) {
+        highScores = [0, 0, 0, 0, 0];
+    } else {
+        highScores = highScores.slice(0, 5);
+    }
+    
+    highScoresList.innerHTML = highScores.map(score => `<li>${score}</li>`).join('');
+    scoreboard.classList.remove('hidden');
+    setTimeout(() => {
+        scoreboard.classList.add("hidden");
+    }, 8000);
+};
