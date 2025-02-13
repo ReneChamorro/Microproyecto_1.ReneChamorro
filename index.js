@@ -89,6 +89,7 @@ const quarterCLicked = (quarter) => {
             gameOverMessage.classList.add("hidden");
         }, 2000);
         showScoreboard();
+        incrementTotalPlays();
     }
 }
 
@@ -163,3 +164,16 @@ const backToMenu = () => {
 
 backTomenuButton.addEventListener('click', backToMenu);
 
+const incrementTotalPlays = () => {
+    let totalPlaysCount = parseInt(localStorage.getItem('totalPlays')) || 0;
+    totalPlaysCount++;
+    localStorage.setItem('totalPlays', totalPlaysCount);
+    totalPlays.textContent = `${totalPlaysCount}`;
+};
+
+const loadTotalPlays = () => {
+    let totalPlaysCount = parseInt(localStorage.getItem('totalPlays')) || 0;
+    totalPlays.textContent = `${totalPlaysCount}`;
+};
+
+loadTotalPlays();
