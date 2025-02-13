@@ -12,13 +12,14 @@ const backTomenuButton = document.querySelector("#back-to-menu");
 const mainMenu = document.querySelector("#main-menu");
 const totalPlays = document.querySelector("#total-plays");
 const playerName = document.querySelector("#player-name");
+const highScoresButton = document.querySelector("#high-scores-button");
 
 const sounds = {
     topLeft: new Audio('Audio/huh-cat-meme.mp3'),
     topRight: new Audio('Audio/pum.mp3'),
-    bottomLeft: new Audio('Audio/pummm.mp3'),
-    bottomRight: new Audio('Audio/short-augh.mp3'),
-    gameOver: new Audio('Audio/undertale-soul-shatter.mp3')
+    bottomLeft: new Audio('Audio/discord.mp3'),
+    bottomRight: new Audio('Audio/pew.mp3'),
+    gameOver: new Audio('Audio/Death.mp3')
 };
 
 let score = 0;
@@ -159,6 +160,12 @@ const backToMenu = () => {
 };
 
 backTomenuButton.addEventListener('click', backToMenu);
+
+const ShowHighScores = () => {
+    showScoreboard();
+};
+
+highScoresButton.addEventListener('click', ShowHighScores);
 
 const incrementTotalPlays = () => {
     let totalPlaysCount = parseInt(localStorage.getItem('totalPlays')) || 0;
