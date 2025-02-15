@@ -276,7 +276,7 @@ h1 {
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (max-width: 768px) {
     #game {
       grid-template-columns: repeat(2, 120px);
       grid-template-rows: repeat(2, 120px);
